@@ -4,6 +4,8 @@ import CategoryFilter from "../compomemts/categoryFilter";
 import PriceRangeFilter from "../compomemts/PriceRangeFilter";
 import { Suspense } from "react";
 import Loader from "../compomemts/Loader";
+import API_URL from "@/utils/utils"
+
 
 type Props = {
   searchParams: Promise<{
@@ -16,10 +18,10 @@ type Props = {
 
 async function getCategories() {
   const res = await fetch(
-    "https://fakestoreapi.com/products/categories",
+    `${API_URL}/products/categories`,
     { cache: "no-store" }
   );
-
+  
   return res.json();
 }
 

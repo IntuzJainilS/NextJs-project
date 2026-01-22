@@ -17,7 +17,10 @@ type ProductType = {
 // console.log("api")
 
 async function getProducts() {
-    const res = await fetch("https://fakestoreapi.com/products", {
+    if (!API_URL) {
+        throw new Error("API_URL is not defined. Check your .env file.");
+    }
+    const res = await fetch(`${API_URL}/products`, {
         cache: "no-store",
     });
     return res.json();
@@ -68,6 +71,7 @@ export default async function ProductsList({
                             alt={p.title}
                             width={200}
                             height={200}
+                            loading="eager"
                             className="h-40 w-full object-contain mb-3"
                         />
                         <h3 className="font-semibold text-lg mb-2 line-clamp-2">
