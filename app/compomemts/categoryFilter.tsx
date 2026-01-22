@@ -10,7 +10,7 @@ const CategoryFilter = ({ categories }: Props) => {
     const searchparams = useSearchParams();
 
     const selected = searchparams.getAll("category");
-    console.log(selected);
+    console.log("selected",selected);
 
     const toggleCategory = (cat: string) => {
     const params = new URLSearchParams(searchparams.toString());

@@ -28,7 +28,7 @@ const SearchBar = ({ defaultValue }: iDefault) => {
     }
 
     return (
-        <div className="search__input border-2px border-solid border-slate-500 flex flex-row items-center gap-5 p-1 rounded-[15px]">
+        <div className="border p-4 rounded-sm space-y-3 m-2">
 
             <input type="text"
                 id="inputId"

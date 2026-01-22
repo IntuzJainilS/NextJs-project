@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import API_URL from "@/utils/utils"
 
 type ProductType = {
     id: number;
@@ -10,6 +11,11 @@ type ProductType = {
     description: string;
 };
 
+// console.log("API_BASE_URL =", API_URL);
+
+// const api = process.env.NEXT_PUBLIC_API_URL;
+// console.log("api")
+
 async function getProducts() {
     const res = await fetch("https://fakestoreapi.com/products", {
         cache: "no-store",
@@ -17,24 +23,40 @@ async function getProducts() {
     return res.json();
 }
 
-export default async function ProductsList({ query, categories, }: { query: string; categories: string[]; }) {
+type Props = {
+    query: string;
+    categories: string[];
+    min: number | null;
+    max: number | null;
+};
+
+export default async function ProductsList({
+    query,
+    categories,
+    min,
+    max,
+}: Props) {
     const products: ProductType[] = await getProducts();
 
-   const safeQuery = (query || "").toLowerCase();
+    const safeQuery = (query || "").toLowerCase();
 
-  const filteredProducts = products.filter((p) => {
-    const matchTitle = p.title
-      .toLowerCase()
-      .includes(safeQuery);
+    const filteredProducts = products.filter((p) => {
+        const matchTitle = p.title
+            .toLowerCase()
+            .includes(safeQuery);
 
-    const matchCategory =
-      categories.length === 0 || categories.includes(p.category);
+        const matchCategory =
+            categories.length === 0 || categories.includes(p.category);
 
-    return matchTitle && matchCategory;
-  });
+        const matchPrice =
+            (min === null || p.price >= min) &&
+            (max === null || p.price <= max);
+
+        return matchTitle && matchCategory && matchPrice;
+    });
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((p) => (
                 <div
                     key={p.id}

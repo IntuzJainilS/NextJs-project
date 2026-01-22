@@ -28,7 +28,7 @@ export default async function Product({ params }: props) {
 
     return (
         <>
-            <Image src={product.image} width={300}
+            <Image src={product.image} width={300} 
                 height={360} alt={product.title}></Image>
             <h1>{product.title}</h1>
             <p>${product.price}</p>

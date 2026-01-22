@@ -1,11 +1,16 @@
 import SearchBar from "../compomemts/SearchBar";
 import ProductsList from "./ProductList";
 import CategoryFilter from "../compomemts/categoryFilter";
+import PriceRangeFilter from "../compomemts/PriceRangeFilter";
+import { Suspense } from "react";
+import Loader from "../compomemts/Loader";
 
 type Props = {
   searchParams: Promise<{
     q?: string;
     category?: string | string[];
+    min?: string;
+    max?: string;
   }>;
 };
 
@@ -28,8 +33,11 @@ export default async function Products({ searchParams }: Props) {
   const selectedCategories = Array.isArray(categoryParam)
     ? categoryParam
     : categoryParam
-    ? [categoryParam]
-    : [];
+      ? [categoryParam]
+      : [];
+
+  const min = params?.min ? Number(params.min) : null;
+  const max = params?.max ? Number(params.max) : null;
 
   const categories = await getCategories();
 
@@ -38,10 +46,14 @@ export default async function Products({ searchParams }: Props) {
       <SearchBar defaultValue={query} />
 
       <CategoryFilter categories={categories} />
+      <PriceRangeFilter/>
 
       <h2 className="text-2xl font-bold mb-6">All Products</h2>
 
-      <ProductsList query={query} categories={selectedCategories} />
+        <Suspense fallback={<Loader/>}>
+      <ProductsList query={query} categories={selectedCategories} min={min}
+        max={max} />
+        </Suspense>
     </div>
-  );
+  );  
 }
