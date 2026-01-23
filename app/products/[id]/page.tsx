@@ -18,10 +18,10 @@ type ProductType = {
 export default async function Product({ params }: Props) {
   const { id } = await params;
 
-  const numericId = Number(id);
-  if (isNaN(numericId) || numericId > 20) {
-    notFound();
-  }
+  // const numericId = Number(id);
+  // if (isNaN(numericId) || numericId > 20) {
+  //   notFound();
+  // }
 
   try {
     const res = await fetch(`${API_URL}/products/${id}`, {

@@ -10,7 +10,7 @@ const SearchBar = ({ defaultValue }: iDefault) => {
 
     const router = useRouter();
 
-    const [inputValue, setInputValue] = useState(defaultValue ?? "");
+    const [inputValue, setInputValue] = useState(defaultValue ?? "");   
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
