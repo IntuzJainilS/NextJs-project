@@ -23,6 +23,10 @@ export default function PriceRangeFilter() {
             alert("Min price should be less than Max price");
             return;
         }
+        if(minNum === maxNum){
+            alert("maximum number and minimum number cannot be same ");
+            return;
+        }
 
         if (minNum !== null) params.set("min", String(minNum));
         else params.delete("min");

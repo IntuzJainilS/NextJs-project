@@ -48,8 +48,8 @@ export default async function Products({ searchParams }: Props) {
       <SearchBar defaultValue={query} />
 
       <div className="flex gap-6">
-        <aside className="w-260px shrink-0 border rounded p-4 h-fit mt-40">
-          <h3 className="font-bold mb-4 text-lg ml-55">Filters</h3>
+        <aside className="w-300px shrink-0 border rounded p-4 h-fit mt-40 sticky top-3">
+          <h3 className="font-bold mb-4 text-lg ml-58">Filters</h3>
 
           <CategoryFilter categories={categories} />
           <PriceRangeFilter />
