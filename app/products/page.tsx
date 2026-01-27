@@ -44,19 +44,19 @@ export default async function Products({ searchParams }: Props) {
   const categories = await getCategories();
 
    return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 sm:p-6 space-y-6 bg-linear-to-t from-sky-300 to-indigo-300 min-h-screen">
       <SearchBar defaultValue={query} />
 
-      <div className="flex gap-6">
-        <aside className="w-300px shrink-0 border rounded p-4 h-fit mt-40 sticky top-3">
-          <h3 className="font-bold mb-4 text-lg ml-58">Filters</h3>
+      <div className="flex flex-col lg:flex-row gap-6">
+        <aside className="w-full lg:w-72 border rounded-xl p-4 h-fit bg-amber-50 lg:sticky lg:top-24">
+          <h3 className="font-bold mb-4 text-lg text-center lg:text-left">Filters</h3>
 
           <CategoryFilter categories={categories} />
           <PriceRangeFilter />
         </aside>
 
-        <main className="flex-1">
-          <h2 className="text-2xl font-bold mb-6 ml-155">All Products</h2>
+        <main className="flex-1 border-4 m-2 p-2 bg-blue-200">
+          <h2 className="text-2xl font-bold mb-6 text-center lg:text-center">All Products</h2>
 
           <Suspense fallback={<Loader />}>
             <ProductsList

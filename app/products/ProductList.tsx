@@ -11,10 +11,12 @@ type ProductType = {
     description: string;
 };
 
-// console.log("API_BASE_URL =", API_URL);
-
-// const api = process.env.NEXT_PUBLIC_API_URL;
-// console.log("api")
+type Props = {
+    query: string;
+    categories: string[];
+    min: number | null;
+    max: number | null;
+};
 
 async function getProducts() {
     if (!API_URL) {
@@ -25,13 +27,6 @@ async function getProducts() {
     });
     return res.json();
 }
-
-type Props = {
-    query: string;
-    categories: string[];
-    min: number | null;
-    max: number | null;
-};
 
 export default async function ProductsList({
     query,
@@ -72,9 +67,9 @@ export default async function ProductsList({
                             width={200}
                             height={200}
                             loading="eager"
-                            className="h-40 w-full object-contain mb-3"
+                            className="h-40 w-full object-contain mb-3" 
                         />
-                        <h3 className="font-semibold text-lg mb-2 line-clamp-2">
+                        <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-center">
                             {p.title}
                         </h3>
 

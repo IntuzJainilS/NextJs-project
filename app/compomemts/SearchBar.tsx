@@ -29,22 +29,26 @@ const SearchBar = ({ defaultValue }: iDefault) => {
             if (value.length < 3) return;
 
             router.push(`/products?q=${encodeURIComponent(value)}`);
-        }, 500); 
+        }, 500);
 
         return () => clearTimeout(delay);
     }, [inputValue, router]);
 
     return (
-        <div className="border p-4 rounded-sm space-y-3 m-2">
-
-            <input type="text"
-                id="inputId"
-                placeholder="Enter your keywords"
-                value={inputValue ?? ""} onChange={handleChange}
-                className="bg-transparent outline-none border-none w-full py-3 pl-2 pr-3" />
-
+        <div className="flex justify-center mt-6">
+            <div className="border p-4 rounded-2xl space-y-3 m-2 bg-amber-50 w-200">
+                <input
+                    type="text"
+                    id="inputId"
+                    placeholder="Enter your keywords"
+                    value={inputValue ?? ""}
+                    onChange={handleChange}
+                    className="bg-transparent outline-none border-none w-full py-3 pl-2 pr-3"
+                />
+            </div>
         </div>
-    )
+    );
+
 }
 
 export default SearchBar
